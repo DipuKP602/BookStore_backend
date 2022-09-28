@@ -31,6 +31,16 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
+        public IHttpActionResult Edit(int catId,Category category)
+        {
+            var res = categoryRepository.EditCategory(catId, category);
+            if (res)
+                return Ok("Edit successful");
+            else
+                return BadRequest();
+        }
+
+        [HttpPost]
         public IHttpActionResult Delete(int id)
         {
             bool res = categoryRepository.DeleteCategory(id);

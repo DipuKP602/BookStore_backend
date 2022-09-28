@@ -45,9 +45,21 @@ namespace BookStore.Models
                 return false;
         }
 
-        public void EditCategory(int Id,Category category)
+        public bool EditCategory(int Id,Category category)
         {
-            throw new NotImplementedException();
+            comm.Connection = conn;
+            comm.CommandText = "update category"
+                +" set categoryId="+category.catId+ ", categoryName='"+category.catName
+                +"', description='"+category.desc+ "', image='"+category.imageURL+"',"
+                +"status="+category.status+",position="+category.pos+",createdAt='"+category.date.ToString("yyyy-MM-dd")
+                +"' where categoryId="+Id;
+            conn.Open();
+            int rows = comm.ExecuteNonQuery();
+            conn.Close();
+            if (rows > 0)
+                return true;
+            else
+                return false;
         }
 
         public List<Category> GetCategories()
