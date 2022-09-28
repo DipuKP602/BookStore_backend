@@ -10,8 +10,8 @@ namespace BookStore.Models
     {
         List<Category> GetCategories();
         Category AddCategory(Category category);
-        void EditCategory(Category category);
+        void EditCategory(int Id,Category category);
 
-        void DeleteCategory(Category category);
+        bool DeleteCategory(int catId);
     }
 }

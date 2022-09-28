@@ -19,15 +19,33 @@ namespace BookStore.Models
         }
         public Category AddCategory(Category category)
         {
-            throw new NotImplementedException();
+            string createdAt = category.date.ToString("yyyy-MM-dd");
+            comm.Connection = conn;
+            comm.CommandText = "insert into category values ("+category.catId+",'"+category.catName+"','"+category.desc+"','"+category.imageURL+"',"+category.status+","+category.pos+",'"+createdAt+"')";
+            conn.Open();
+            int rows = comm.ExecuteNonQuery();
+            conn.Close();
+            if (rows > 0)   
+                return category;
+            else 
+                return null;
+            
         }
 
-        public void DeleteCategory(Category category)
+        public bool DeleteCategory(int Id)
         {
-            throw new NotImplementedException();
+            comm.CommandText = "delete from category where categoryId=" + Id;
+            comm.Connection = conn;
+            conn.Open();
+            int rows = comm.ExecuteNonQuery();
+            conn.Close();
+            if (rows > 0)
+                return true;
+            else
+                return false;
         }
 
-        public void EditCategory(Category category)
+        public void EditCategory(int Id,Category category)
         {
             throw new NotImplementedException();
         }
@@ -48,8 +66,9 @@ namespace BookStore.Models
                 string name = reader["categoryName"].ToString();
                 string imageURL = reader["image"].ToString();
                 string desc = reader["description"].ToString();
+                //string date = reader["createdAt"].ToString();
                 //DateTime date = DateTime.ParseExact(reader["createdAt"].ToString(),"yyyy",CultureInfo.InvariantCulture);
-                DateTime date = Convert.ToDateTime(reader["createdAt"].ToString());
+                DateTime date = Convert.ToDateTime(reader["createdat"].ToString());
                 Category cat = new Category(id, name, desc, imageURL, status, pos, date);
                 catList.Add(cat);
             }

@@ -22,5 +22,22 @@ namespace BookStore.Controllers
             var data = categoryRepository.GetCategories();
             return Ok(data);
         }
+
+        [HttpPost]
+        public IHttpActionResult Post(Category category)
+        {
+            var res = categoryRepository.AddCategory(category);
+            return Ok(res);
+        }
+
+        [HttpPost]
+        public IHttpActionResult Delete(int id)
+        {
+            bool res = categoryRepository.DeleteCategory(id);
+            if (res)
+                return Ok("Category deleted");
+            else
+                return BadRequest();
+        }
     }
 }
