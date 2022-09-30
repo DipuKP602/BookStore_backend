@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace BookStore.Models
-{
+{ 
     public class Book
     {
         public int BookId { get; set; }

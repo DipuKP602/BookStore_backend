@@ -8,6 +8,14 @@ namespace BookStore.Models
 {
     public interface IBookRepository
     {
+        List<Book> GetAllBooks();
 
+        List<Book> GetBooksByCategory(int catId);
+
+        Book AddBook(Book book);
+
+        bool EditBook(int id,Book book);
+
+        bool DeleteBook(int id);
     }
 }
