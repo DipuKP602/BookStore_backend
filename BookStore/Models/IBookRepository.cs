@@ -12,7 +12,7 @@ namespace BookStore.Models
 
         List<Book> GetBooksByCategory(int catId);
 
-        Book AddBook(Book book);
+        string AddBook(Book book);
 
         bool EditBook(int id,Book book);
 
