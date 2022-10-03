@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Globalization;
 
 namespace BookStore.Models
 {
@@ -20,8 +21,9 @@ namespace BookStore.Models
 
         public string AddBook(Book book)
         {
+            string year = book.Year.ToString("yyyy");
             comm.Connection = conn;
-            comm.CommandText = "insert into book values ("+book.BookId+","+book.CatId+",'"+book.Title+"','"+book.ISBN+"','"+book.Year+","+book.Price+",'"+book.Description+"',"+book.Position+","+book.Status+",'"+book.ImageURL+"');";
+            comm.CommandText = "Id: "+book.BookId;
             conn.Open();
             return comm.CommandText;
             //int rows = comm.ExecuteNonQuery();
@@ -59,7 +61,8 @@ namespace BookStore.Models
 
                 string title = reader["title"].ToString();
                 string iSBN = reader["isbn"].ToString();
-                DateTime year = Convert.ToDateTime(reader["year"].ToString());
+                //DateTime year = Convert.ToDateTime(reader["year"].ToString());
+                DateTime year = DateTime.ParseExact(reader["year"].ToString(),"yyyy",CultureInfo.InvariantCulture);
                 string description = reader["description"].ToString();
                 string imageURL = reader["image"].ToString();
 

@@ -31,7 +31,7 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Post(Book book)
+        public IHttpActionResult Post([FromBody] Book book)
         {
             var res = bookRepository.AddBook(book);
             return Ok(res);
